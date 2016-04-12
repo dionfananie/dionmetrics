@@ -1,0 +1,28 @@
+{% load staticfiles %}
+<div class="container"> 
+        <div class="row center">
+          <h1 class="header center orange-text">Dionmetrics</h1>
+          <div class="row center">
+            <h5 class="header col s12 light">A modern responsive Twitter Metrics based on Lexical Diversity</h5>
+          </div>
+            <div class="valign-wrapper input-field ">
+                <form action="/search_result/" method="post">{% csrf_token %} 
+                  <label>Hashtag: </label>
+                  <input type="text" name="hashtag" value="" class="validate" >
+                  <a class="waves-effect waves-light btn blue darken-1 modal-trigger z-depth-2" href="#modal1">TIPS</a>
+                  <input type="submit" value="SEARCH" class ="btn tooltipped blue darken-1 z-depth-2 ">
+                </form>
+            </div>
+             
+          </div>
+        </div>
+            <!-- Modal Structure -->
+                  <div id="modal1" class="modal">
+                    <h4>SEARCHING TIPS</h4>
+                    <p>You should input text start with '#' and text related to your hashtag promotion. it will help you search tweet related to your hashtag.</p>
+                    <h6>Example</h6>
+                    <strong>#IniTalkShow</strong>
+                    <div class="action-bar">
+                      <a href="#" class="waves-effect waves-grey btn-flat modal-action modal-close">OK</a>
+                    </div>
+                  </div>

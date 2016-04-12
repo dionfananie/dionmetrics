@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="container ">
+	<h2>F.A.Q</h2>
+	 <ul class="collapsible " data-collapsible="accordion ">
+	     <li>
+	      <div class="collapsible-header">What is purpose of this web app ?</div>
+	      <div class="collapsible-body"><p>This web app can measure effectiveness of twitter marketing.</p></div>
+	    </li>
+    	<li>
+	      <div class="collapsible-header">What is Lexical diversity ?</div>
+	      <div class="collapsible-body"><p>is an interesting concept in the area of interpersonal
+											communications because it provides a quantitative measure for the diversity of an in‐
+											dividual’s or group’s vocabulary</p></div>
+	    </li>
+	    <li>
+	      <div class="collapsible-header">How can measure promotion effectiveness ? </div>
+	      <div class="collapsible-body"><p>from the four element results such as WORDS, SCREEN NAMES, HASHTAG, AVERAGE TEXT.</p></div>
+	    </li>
+	    <li>
+	      <div class="collapsible-header">How i use this app? </div>
+	      <div class="collapsible-body">
+	      		<p>Input text to hashtag form begin with "#" and click SEARCH. TIPS button will give you trick to input  </p>
+	      		<img src="{%static 'img/input.png'%}"><br>
+	      </div>
+	    </li>
+	    <li>
+	      <div class="collapsible-header">What is WORDS ?</div>
+	      <div class="collapsible-body">
+			<h5 class="center">Example</h5> 
+	      	<p class="center" >The lexical diversity of the words in the text of the tweets is around 67. One way
+to interpret that figure would be to say that about two out of every three words is
+unique, or you might say that each status update carries around 67% unique infor‐
+mation. Given that the average number of words in each tweet is around six, that
+translates to about four unique words per tweet. Intuition aligns with the data in
+that the nature of a #something trending hashtag is to so‐
+licit a response that will probably be a few words long. In any event, a value of 0.67
+is on the high side for lexical diversity of ordinary human communication, but given
+the nature of the data, it seems very reasonable.</p></div>
+	    </li>
+	    <li>
+	      <div class="collapsible-header">What is SCREEN NAMES ?</div>
+	      <div class="collapsible-body"><h5 class="center">Example</h5> 
+	      	<p class="center" >The lexical diversity of the screen names, however, is even higher, with a value of
+0.95, which means that about 19 out of 20 screen names mentioned are unique.
+This observation also makes sense given that many answers to the question will be
+a screen name, and that most people won’t be providing the same responses for the
+solicitous hashtag.</p></div>
+	    </li>
+	     <li>
+	      <div class="collapsible-header">What is HASHTAG ?</div>
+	      <div class="collapsible-body"><h5 class="center">Example</h5> 
+	      	<p class="center" >TThe lexical diversity of the hashtags is extremely low at a value of around 6 %,
+implying that very few values other than the #MentionSomeoneImportantForYou
+hashtag appear multiple times in the results. Again, this makes good sense given
+that most responses are short and that hashtags really wouldn’t make much sense
+to introduce as a response to the prompt of mentioning someone important for
+you.</p></div>
+	    </li>
+	     <li>
+	      <div class="collapsible-header">What is AVERAGE TEXT ?</div>
+	      <div class="collapsible-body"><h5 class="center">Example</h5> 
+	      	<p class="center" >The average number of words per tweet is very low at a value of just under 6, which
+makes sense given the nature of the hashtag, which is designed to solicit short
+responses consisting of just a few words.</p></div>
+	    </li>
+	    <li>
+	      <div class="collapsible-header">what kind of situation which called effective ?</div>
+	      <div class="collapsible-body"><p>your tweet promotion called effective if you get WORDS > 50, SCREEN NAMES > 50, HASHTAG < 20 and AVERAGE TEXT > 50 </p></div>
+	    </li>
+	    <li>
+	      <div class="collapsible-header">What i get from table tweet?</div>
+	      <div class="collapsible-body"><p>the Table tweet will give you tweet information related to your keyword input such as how many counted, tweet content, etc</p></div>
+	    </li>
+  </ul>
+</div>
+
+{% endblock %}

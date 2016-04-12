@@ -1,0 +1,100 @@
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+
+from collections import Counter
+from prettytable import PrettyTable
+import twitter
+import json	
+
+# XXX: Set this variable to a trending topic,
+# or anything else for that matter. The example query below
+# was a trending topic when this content was being developed
+# and is used throughout the remainder of this chapter.
+		
+# Explore the first 5 items for each...
+#print json.dumps(status_texts[0:5], indent=1)
+#print json.dumps(screen_names[0:5], indent=1)
+#print json.dumps(hashtags[0:5], indent=1)
+#print json.dumps(words[0:15], indent=1)
+
+
+#for item in [words, screen_names, hashtags]:
+#	c = Counter(item)
+#	print c.most_common()[:10] # top 10
+
+# A function for computing lexical diversity
+def lexical_diversity(tokens):
+	return 1.0*len(set(tokens))/len(tokens)
+	
+def lediv(tokens):
+	total_words = [ len(s.split()) for s in tokens ]
+	print total_words
+	return 1.0*len(set(total_words))/len(tokens)
+	
+# A function for computing the average number of words per tweet
+def average_words(statuses):
+	total_words = sum([ len(s.split()) for s in statuses ])
+	return 1.0*total_words/len(statuses)
+
+def index(request):
+	CONSUMER_KEY = 'P8TbqI93uitIPB2ie275GP0D8'
+	CONSUMER_SECRET = 'rUv8Lc2bw5CRiQzXB9FPcHKSBCpoNWpSVSNbMwFqRGIVLjz1CY'
+	OAUTH_TOKEN = '82629030-RALOevVc0oCOe0kVtBx09ChwfKg6UQ3v2uiTBD1rU'
+	OAUTH_TOKEN_SECRET = 'PzUdiqtBUfXjGum2bX0uHvFRaHUGsxYDUjGrqYgncPED1'
+	auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET,
+	 CONSUMER_KEY, CONSUMER_SECRET)
+	twitter_api = twitter.Twitter(auth=auth)
+
+	q = '#HUTRocky'
+	count = 100
+	# See https://dev.twitter.com/docs/api/1.1/get/search/twseets
+	search_results = status.twitter_api.search.tweets(q=q, count=count)
+	statuses = search_results['statuses']
+	# Iterate through 5 more batches of results by following the cursor
+	for _ in range(5):
+		print "Length of statuses", len(statuses)
+		try:	
+			next_results = search_results['search_metadata']['next_results']
+
+		except KeyError, e: # No more results when next_results doesn't exist
+			break
+	status_texts = [ status['text']
+		for status in statuses ]
+	screen_names = [ user_mention['screen_name']
+		for status in statuses
+			for user_mention in status['entities']['user_mentions'] ]
+	hashtags = [ hashtag['text']
+		for status in statuses
+			for hashtag in status['entities']['hashtags'] ]
+	# Compute a collection of all words from all tweets
+	words = [ w for t in status_texts
+			for w in t.split() ]
+
+
+	retweets = [
+		# Store out a tuple of these three values ...
+		(status['retweet_count'],
+		status['retweeted_status']['user']['screen_name'],
+		status['text'])
+	
+		# ... for each status ...
+		for status in statuses
+		# ... so long as the status meets this condition.
+			if status.has_key('retweeted_status')
+		]
+		# Slice off the first 5 from the sorted results and display each item in the tuple
+
+	pt = PrettyTable(field_names=['Count', 'Screen Name', 'Text'])
+	[ pt.add_row(row) for row in sorted(retweets, reverse=True)[:25]]
+	pt.max_width['Text'] = 50
+	pt.align= 'l'
+	print pt
+
+	words = lexical_diversity(status_texts)
+	scrname =lexical_diversity(screen_names)
+	return render_to_response('index.html', {'words': words, 'scrname': scrname})
+    
+def base(request):
+	return render_to_response('base.html')
+    
+

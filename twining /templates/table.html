@@ -1,0 +1,32 @@
+<div class="row center">
+    <div class="col s12 ">
+        <div class="z-depth-2">
+        	<div class="card-panel blue-grey lighten-4">
+        	 <div class="blue-grey-text text-darken-4">
+	       		<table class="centered hoverable">
+	        		<thead>
+	          			<tr >
+	              			<th data-field="id">COUNT</th>
+	              			<th data-field="name">SCREEN NAME</th>
+	              			<th data-field="price">TWEET</th>
+	          			</tr>
+	        		</thead>
+
+	        	<tbody>
+	        
+	        	 	{% for x,y,z in rt %}
+	          		<tr>
+				        <td>{{x}}</td>
+				        <td>{{y}}</td>
+				        <td>{{z}}</td>
+	          		</tr>
+	          		
+	          	{% endfor %}
+	        	</tbody>
+	     	    </table>  
+        	 </div>
+        	</div>
+        </div>
+    </div>
+</div>
+            
